@@ -1,0 +1,14 @@
+.sections {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .text_wrap {
+    .text_line {
+      display: flex;
+      input[type='number'] {
+        margin: 0 5px;
+      }
+    }
+  }
+}
