@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <img
+      @click="popupClick"
+      v-if="popup"
+      class="popup"
+      src="../src/image/popup.png"
+      alt="팝업"
+    />
     <Main></Main>
     <registor-page @sandData="postData"></registor-page>
     <registor-result-page
@@ -24,14 +31,10 @@ export default {
     return {
       section1Datas: {},
       incomePrice: '',
-      section2Show: false,
+      popup: true,
     };
   },
-  watch: {
-    section1Datas() {
-      this.section1Datas ? (this.section2Show = true) : '';
-    },
-  },
+
   components: {
     Main,
     RegistorPage,
@@ -49,8 +52,29 @@ export default {
     postIncomePirce(incomePrice) {
       this.incomePrice = incomePrice;
     },
+    popupClick() {
+      this.popup = false;
+      sessionStorage.setItem('popup', 'hide');
+    },
+  },
+  created() {
+    sessionStorage.getItem('popup') === 'hide'
+      ? (this.popup = false)
+      : (this.popup = true);
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 10px 10px 36px 6px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 10px 10px 36px 6px rgba(0, 0, 0, 0.26);
+  box-shadow: 10px 10px 36px 6px rgba(0, 0, 0, 0.26);
+  border-radius: 11px;
+}
+</style>

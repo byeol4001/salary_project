@@ -27,7 +27,7 @@
       </div>
       <div class="text_line">
         <span @click="moveSection('section_3')" style="margin-top:35px"
-          >이거사려먼 얼마나 벌어야하는지 알아보기! ></span
+          >이거사려면 얼마나 벌어야하는지 알아보기! ></span
         >
       </div>
     </div>
