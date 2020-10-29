@@ -86,7 +86,6 @@ export default {
       dailyIncomePrice = salary / lastDate;
 
       if (!this.minusDate) {
-        console.log('월급날마이너스아님');
         this.$emit('postIncomePirce', dailyIncomePrice);
         result = Math.floor(
           parseFloat(dailyIncomePrice * (date - payday))
