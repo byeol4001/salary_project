@@ -1,31 +1,57 @@
 <template>
   <div id="app">
-    <registor-page></registor-page>
-    <registor-result-page></registor-result-page>
+    <Main></Main>
+    <registor-page @sandData="postData"></registor-page>
+    <registor-result-page
+      :sec1Data="section1Datas"
+      @postIncomePirce="postIncomePirce"
+    ></registor-result-page>
+    <Calculating :postIncomePirce="incomePrice"></Calculating>
   </div>
 </template>
 
 <script>
+import Main from './components/Main';
 import RegistorPage from './components/RegistorPage.vue';
 import RegistorResultPage from './components/RegistorResultPage.vue';
+import Calculating from './components/Calculating.vue';
+import { moveTo } from './utils/utils';
 
 export default {
   name: 'App',
+
+  data() {
+    return {
+      section1Datas: {},
+      incomePrice: '',
+      section2Show: false,
+    };
+  },
+  watch: {
+    section1Datas() {
+      this.section1Datas ? (this.section2Show = true) : '';
+    },
+  },
   components: {
+    Main,
     RegistorPage,
     RegistorResultPage,
+    Calculating,
   },
-  created() {
-    window.__scrollPosition = document.documentElement.scrollTop || 0;
-    document.addEventListener('scroll', function() {
-      const _documentY = document.documentElement.scrollTop;
-      const _direction = _documentY - window.__scrollPosition >= 0 ? 1 : -1;
-      console.log(_direction); // 콘솔창에 스크롤 방향을 출력
-
-      window.__scrollPosition = _documentY; // Update scrollY
-    });
+  mounted() {
+    moveTo('main');
+  },
+  methods: {
+    postData(datas) {
+      console.log(datas);
+      this.section1Datas = datas;
+    },
+    postIncomePirce(incomePrice) {
+      this.incomePrice = incomePrice;
+      console.log(incomePrice, '부모에서 받은 일급');
+    },
   },
 };
 </script>
 
-<style></style>
+<style lang="scss"></style>
