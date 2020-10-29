@@ -1,25 +1,91 @@
 <template>
   <div id="section_1" class="sections">
-    <div class="text_wrap">
+    <form class="text_wrap">
       <div class="text_line">
-        <h1>오늘은</h1>
-        <input type="number" v-model="payday" placeholder="1-31" />
-        <h1>일?</h1>
+        <h1>월급일은 매월</h1>
+        <input
+          type="number"
+          v-model="payday"
+          placeholder="월급날"
+          pattern="^[0-9]*$"
+        />
+        <h1>일</h1>
       </div>
-    </div>
+      <div class="text_line">
+        <h1>
+          <select v-model="SalarySelect">
+            <option selected>월급</option>
+            <option>연봉</option>
+          </select>
+        </h1>
+        <input
+          class="big"
+          type="number"
+          v-model="salary"
+          placeholder="급여액"
+          pattern="^[0-9]*$"
+        />
+        <h1>원</h1>
+      </div>
+      <div class="text_line" @click.prevent="moveSection('section_2')">
+        <button>오늘까지 번 이번달 월급 확인하기 🤔</button>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
+import { moveTo } from '../utils/utils';
 export default {
   data() {
-    return { payday: '' };
+    return {
+      payday: '',
+      salary: '',
+      SalarySelect: '월급',
+    };
+  },
+  watch: {
+    payday() {
+      if (this.payday > 31) {
+        this.payday = 1;
+      } else if (this.payday <= 0) {
+        this.payday = 31;
+      }
+    },
+    salary() {
+      const locale = this.salary.toLocaleString();
+      return locale;
+    },
+    SalarySelect() {
+      if (this.SalarySelect === '연봉') {
+        alert('죄송합니다. 연봉 계산은 준비중입니다 🙅🏻‍♀️');
+        this.SalarySelect = '월급';
+      }
+    },
   },
   methods: {
-    moveTo() {
-      document
-        .getElementById('section_2')
-        .scrollIntoView({ behavior: 'smooth' });
+    moveSection(goto) {
+      if (this.payday && this.salary) {
+        moveTo(goto);
+        const data = {
+          payday: this.payday,
+          salary: this.salary,
+          SalarySelect: this.SalarySelect,
+        };
+        this.$emit('sandData', data);
+      } else if (this.payday && this.salary) {
+        moveTo(goto);
+        const data = {
+          payday: this.payday,
+          salary: this.salary,
+          SalarySelect: this.SalarySelect,
+        };
+        this.$emit('sandData', data);
+      } else {
+        console.log(typeof this.payday);
+        console.log(typeof this.salary);
+        alert('급여일과 금액을 알려주세요!');
+      }
     },
   },
 };
@@ -29,5 +95,8 @@ export default {
 @import '../style/_variables.scss';
 h1 {
   color: $mainColor;
+}
+p {
+  text-align: center;
 }
 </style>

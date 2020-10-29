@@ -15,21 +15,89 @@ a {
 }
 
 @font-face {
-  font-family: 'CookieRun-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff')
+  font-family: MBold;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: MLight;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: NSR;
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
     format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 html {
-  font-family: 'CookieRun-Regular';
+  font-family: NSR;
+  font-size: 16px;
+  -ms-overflow-style: none;
+  overflow: hidden;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 
-input {
+input[type='number'] {
   width: 80px;
+  font-family: NSR;
   height: 43px;
-  padding: 5px;
   border: none;
   border-bottom: 1px solid #fa574c;
+}
+
+input[type='text'] {
+  width: 80px;
+  font-family: NSR;
+  height: 43px;
+  border: none;
+  border-bottom: 1px solid #fa574c;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: push-button;
+}
+
+input::-webkit-input-placeholder {
+  color: #fa584cb4;
+  font-family: NSR;
+}
+input:-ms-input-placeholder {
+  color: #fa584cb4;
+  font-family: NSR;
+}
+
+input:focus {
+  outline: none;
+}
+
+select {
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #fa584cb4;
+  font-family: inherit;
+
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.Mfont {
+  font-family: MBold;
 }

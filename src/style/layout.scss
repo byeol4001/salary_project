@@ -1,14 +1,50 @@
+@import '../style/_variables.scss';
+
 .sections {
-  height: 100vh;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   .text_wrap {
     .text_line {
       display: flex;
+      padding: 10px 0;
       input[type='number'] {
-        margin: 0 5px;
+        width: 100px;
+        margin: 0 10px;
+        padding: 7px 0;
+        text-align: center;
+        color: $mainColor;
+        font-size: 28px;
       }
+      input.big {
+        width: 250px;
+        margin: 0 10px;
+        padding: 7px 0;
+        text-align: center;
+        color: $mainColor;
+        font-size: 28px;
+      }
+    }
+    span {
+      background-color: $mainColor;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 3px;
+      margin: 20px auto 0;
+      cursor: pointer;
+    }
+    button {
+      background-color: #fa574c;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 3px;
+      margin: 20px auto 0;
+      cursor: pointer;
+      outline: 0;
+      border: 0;
+      font-size: 1.1rem;
     }
   }
 }
