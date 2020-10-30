@@ -5,12 +5,12 @@
         <h3 class="Mfont">지름신오지마라!! 🙏🏻</h3>
       </div>
       <div class="text_line">
-        <input class="big" type="text" v-model="stuff" placeholder="이거" />
+        <input class="big" type="text" v-model="stuff" placeholder="사고싶은것" />
         <h1>사고싶은데</h1>
       </div>
       <div class="text_line">
         <h1>가격은</h1>
-        <input class="big" type="number" v-model="price" placeholder pattern="^[0-9]*$" />
+        <input class="big" type="number" v-model="price" placeholder="가격" pattern="^[0-9]*$" />
         <h1>원 이야</h1>
       </div>
       <div class="text_line">
@@ -48,7 +48,8 @@ export default {
         moveTo("section_1");
       } else if (stuff && price) {
         this.isActive = true;
-        const count = Math.floor(price / postIncomePirce).toLocaleString();
+        const count = Math.ceil(price / postIncomePirce);
+        console.log(count);
         if (count < 1) {
           this.dateCount = "에이😎 하루만 일하면 사겠네";
         } else if (1 < count > 2) {
@@ -56,8 +57,10 @@ export default {
         } else {
           this.dateCount = `${stuff} 사려면  ${Math.ceil(
             count
-          )}일 동안 일해야해... 화이팅 😅`;
+          )}일 동안 일해야해... 화이팅 😊`;
         }
+      } else if (!Number(price)) {
+        alert("💵 가격에는 숫자만 입력 가능합니다.");
       } else {
         alert("구매하고싶은 것의 이름과 가격을 입력해주세요☺️");
       }
