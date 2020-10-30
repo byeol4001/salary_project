@@ -2,7 +2,6 @@
   <div id="main" class="sections" @click="moveSection('section_1')">
     <div class="text_line">
       <img class="logo" src="../image/logo.png" alt="나 오늘까지 얼마벌었어?" />
-
       <h2>▶ 오늘까지 번 이번달 월급 확인하기 🤔 ◀</h2>
       <div class="icons">
         <img src="../image/icon_wh.png" alt="아이콘1" />
@@ -17,19 +16,19 @@
 </template>
 
 <script>
-import { moveTo } from '../utils/utils';
+import { moveTo } from "../utils/utils";
 
 export default {
   methods: {
     moveSection(goto) {
       moveTo(goto);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../style/_variables.scss';
+@import "../style/_variables.scss";
 #main {
   background-color: $mainColor;
   text-align: center;
@@ -70,7 +69,7 @@ export default {
   h2 {
     color: #fff;
     margin-top: 20px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
   }
 

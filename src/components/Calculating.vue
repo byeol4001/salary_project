@@ -10,45 +10,33 @@
       </div>
       <div class="text_line">
         <h1>가격은</h1>
-        <input
-          class="big"
-          type="number"
-          v-model="price"
-          placeholder=""
-          pattern="^[0-9]*$"
-        />
+        <input class="big" type="number" v-model="price" placeholder pattern="^[0-9]*$" />
         <h1>원 이야</h1>
       </div>
       <div class="text_line">
-        <button @click.prevent="clickButton">
-          이거 사려면 얼마나 일해야할까? ➡︎
-        </button>
+        <button @click.prevent="clickButton">이거 사려면 얼마나 일해야할까? ➡︎</button>
       </div>
       <div class="text_line" v-if="isActive === true">
         <p>{{ dateCount }}</p>
       </div>
-      <img
-        class="top"
-        @click="moveSection('section_1')"
-        src="../image/top.png"
-      />
+      <img class="top" @click="moveSection('section_1')" src="../image/top.png" />
     </form>
   </div>
 </template>
 
 <script>
-import { moveTo } from '../utils/utils';
+import { moveTo } from "../utils/utils";
 export default {
   watch: {},
   data() {
     return {
-      stuff: '',
-      price: '',
+      stuff: "",
+      price: "",
       isActive: false,
-      dateCount: '',
+      dateCount: ""
     };
   },
-  props: ['postIncomePirce'],
+  props: ["postIncomePirce"],
   methods: {
     moveSection(goto) {
       moveTo(goto);
@@ -56,32 +44,30 @@ export default {
     clickButton() {
       const { stuff, price, postIncomePirce } = this;
       if (!this.postIncomePirce) {
-        alert('월급을 입력해 주셔야 해요!');
-        moveTo('section_1');
+        alert("월급을 입력해 주셔야 해요!");
+        moveTo("section_1");
       } else if (stuff && price) {
         this.isActive = true;
-        console.log(this.postIncomePirce, '자식에서 받은거');
         const count = Math.floor(price / postIncomePirce).toLocaleString();
-        console.log(count, 'count');
         if (count < 1) {
-          this.dateCount = '에이😎 하루만 일하면 사겠네';
+          this.dateCount = "에이😎 하루만 일하면 사겠네";
         } else if (1 < count > 2) {
-          this.dateCount = '하루하고 조금만 더 일하면 살 수 있어😊';
+          this.dateCount = "하루하고 조금만 더 일하면 살 수 있어😊";
         } else {
           this.dateCount = `${stuff} 사려면  ${Math.ceil(
             count
           )}일 동안 일해야해... 화이팅 😅`;
         }
       } else {
-        alert('구매하고싶은 것의 이름과 가격을 입력해주세요☺️');
+        alert("구매하고싶은 것의 이름과 가격을 입력해주세요☺️");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../style/_variables.scss';
+@import "../style/_variables.scss";
 h1,
 h3,
 span {

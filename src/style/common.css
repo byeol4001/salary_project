@@ -51,7 +51,7 @@ html {
 input[type='number'] {
   width: 80px;
   font-family: NSR;
-  height: 43px;
+  margin-top: -6px;
   border: none;
   border-bottom: 1px solid #fa574c;
 }
@@ -59,7 +59,7 @@ input[type='number'] {
 input[type='text'] {
   width: 80px;
   font-family: NSR;
-  height: 43px;
+  margin-top: -6px;
   border: none;
   border-bottom: 1px solid #fa574c;
 }
