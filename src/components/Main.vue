@@ -33,8 +33,8 @@ export default {
   background-color: $mainColor;
   text-align: center;
   .logo {
-    width: 50%;
-    min-width: 300px;
+    width: 70%;
+    max-width: 400px;
   }
 
   .icons {

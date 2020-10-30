@@ -34,7 +34,6 @@ export default {
   },
   mounted() {
     moveTo("main");
-    window.scrollTo(0, 0);
   },
   methods: {
     postData(datas) {
