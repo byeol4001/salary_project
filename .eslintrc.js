@@ -15,4 +15,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {},
+  devServer: {
+    overlay: false,
+  },
 };
