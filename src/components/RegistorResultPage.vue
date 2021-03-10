@@ -7,13 +7,15 @@
       <div class="text_line" v-else-if="this.sec1Data.SalarySelect === '연봉'">
         <h1>
           오늘까지 번 돈은
-          <h1 class="Mfont">{{ salaryWon() }}</h1>원
+          <h1 class="Mfont">{{ salaryWon() }}</h1>
+          원
         </h1>
       </div>
       <div class="text_line">
         <h1>
           월급까지 남은날은
-          <small class="Mfont">{{ getNextSalaryDate() }}</small>일
+          <small class="Mfont">{{ getNextSalaryDate() }}</small
+          >일
         </h1>
       </div>
       <div class="text_line percent_wrap">
@@ -24,26 +26,28 @@
         <div class="percent"></div>
       </div>
       <div class="text_line">
-        <span @click="moveSection('section_3')" style="margin-top:35px">이거사려면 얼마나 벌어야하는지 알아보기! ></span>
+        <span @click="moveToSmooth('section_3')" style="margin-top:35px"
+          >이거사려면 얼마나 벌어야하는지 알아보기! ></span
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { moveTo } from "../utils/utils";
+import { moveToSmooth } from '../utils/utils';
 export default {
   data() {
     return {
-      percent: "",
-      dailyIncomePrice: "",
-      minusDate: ""
+      percent: '',
+      dailyIncomePrice: '',
+      minusDate: '',
     };
   },
-  props: ["sec1Data"],
+  props: ['sec1Data'],
   methods: {
-    moveSection(goto) {
-      moveTo(goto);
+    moveToSmooth(goto) {
+      moveToSmooth(goto);
     },
     getNextSalaryDate() {
       let result;
@@ -82,7 +86,7 @@ export default {
       dailyIncomePrice = salary / lastDate;
 
       if (!this.minusDate) {
-        this.$emit("postIncomePirce", dailyIncomePrice);
+        this.$emit('postIncomePirce', dailyIncomePrice);
         result = Math.floor(
           parseFloat(dailyIncomePrice * (date - payday))
         ).toLocaleString();
@@ -104,13 +108,13 @@ export default {
         console.log(countDate, 'countDate');
         return result;
       } */
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-@import "../style/_variables.scss";
+@import '../style/_variables.scss';
 h1 {
   color: $mainColor;
 }

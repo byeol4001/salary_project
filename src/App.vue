@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img @click="popupClick" v-if="popup" class="popup" src="../src/image/popup.png" alt="팝업" />
+    <img
+      @click="popupClick"
+      v-if="popup"
+      class="popup"
+      src="../src/image/popup.png"
+      alt="팝업"
+    />
     <Main></Main>
-    <registor-page @sandData="postData"></registor-page>
-    <registor-result-page :sec1Data="section1Datas" @postIncomePirce="postIncomePirce"></registor-result-page>
+    <RegistorPage @sandData="postData"></RegistorPage>
+    <RegistorResultPage
+      :sec1Data="section1Datas"
+      @postIncomePirce="postIncomePirce"
+    ></RegistorResultPage>
     <Calculating :postIncomePirce="incomePrice"></Calculating>
   </div>
 </template>
 
 <script>
-import Main from "./components/Main";
-import RegistorPage from "./components/RegistorPage.vue";
-import RegistorResultPage from "./components/RegistorResultPage.vue";
-import Calculating from "./components/Calculating.vue";
-import { moveTo } from "./utils/utils";
+import Main from './components/Main';
+import RegistorPage from './components/RegistorPage.vue';
+import RegistorResultPage from './components/RegistorResultPage.vue';
+import Calculating from './components/Calculating.vue';
+import { moveToSmooth } from './utils/utils';
 
 export default {
-  name: "App",
+  name: 'App',
 
   data() {
     return {
       section1Datas: {},
-      incomePrice: "",
-      popup: true
+      incomePrice: '',
+      popup: true,
     };
   },
 
@@ -30,10 +39,10 @@ export default {
     Main,
     RegistorPage,
     RegistorResultPage,
-    Calculating
+    Calculating,
   },
   mounted() {
-    moveTo("main");
+    moveToSmooth('main');
   },
   methods: {
     postData(datas) {
@@ -45,14 +54,14 @@ export default {
     },
     popupClick() {
       this.popup = false;
-      sessionStorage.setItem("popup", "hide");
-    }
+      sessionStorage.setItem('popup', 'hide');
+    },
   },
   created() {
-    sessionStorage.getItem("popup") === "hide"
+    sessionStorage.getItem('popup') === 'hide'
       ? (this.popup = false)
       : (this.popup = true);
-  }
+  },
 };
 </script>
 

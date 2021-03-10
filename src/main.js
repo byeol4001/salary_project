@@ -5,7 +5,6 @@ import '../src/style/common.css';
 import '../src/style/layout.scss';
 
 Vue.config.productionTip = false;
-window.$ = require('jquery');
 
 new Vue({
   render: (h) => h(App),
