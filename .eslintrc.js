@@ -15,7 +15,5 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {},
-  devServer: {
-    overlay: false,
-  },
+  'vue/max-attributes-per-line': 'off',
 };
