@@ -31,7 +31,7 @@ export default {
     return {
       section1Datas: {},
       incomePrice: '',
-      popup: true,
+      popup: false,
     };
   },
 
