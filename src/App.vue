@@ -1,12 +1,5 @@
 <template>
   <div id="app">
-    <img
-      @click="popupClick"
-      v-if="popup"
-      class="popup"
-      src="../src/image/popup.png"
-      alt="팝업"
-    />
     <Main></Main>
     <RegistorPage @sandData="postData"></RegistorPage>
     <RegistorResultPage
@@ -52,15 +45,6 @@ export default {
     postIncomePirce(incomePrice) {
       this.incomePrice = incomePrice;
     },
-    popupClick() {
-      this.popup = false;
-      sessionStorage.setItem('popup', 'hide');
-    },
-  },
-  created() {
-    sessionStorage.getItem('popup') === 'hide'
-      ? (this.popup = false)
-      : (this.popup = true);
   },
 };
 </script>
