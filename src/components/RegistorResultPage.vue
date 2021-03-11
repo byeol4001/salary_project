@@ -147,7 +147,7 @@ h1 {
   }
 }
 
-@-webkit-keyframes iconAnimation {
+@keyframes iconAnimation {
   0% {
     left: 100%;
   }

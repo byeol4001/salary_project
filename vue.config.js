@@ -1,6 +1,5 @@
-// vue.config.js
 module.exports = {
-  devServer: {
-    overlay: false,
+  chainWebpack: (config) => {
+    config.module.rules.delete('eslint');
   },
 };
