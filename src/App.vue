@@ -4,9 +4,9 @@
     <RegistorPage @sandData="postData"></RegistorPage>
     <RegistorResultPage
       :sec1Data="section1Datas"
-      @postIncomePirce="postIncomePirce"
+      @postIncomePrice="postIncomePrice"
     ></RegistorResultPage>
-    <Calculating :postIncomePirce="incomePrice"></Calculating>
+    <Calculating :postIncomePrice="incomePrice"></Calculating>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
       console.log(datas);
       this.section1Datas = datas;
     },
-    postIncomePirce(incomePrice) {
+    postIncomePrice(incomePrice) {
       this.incomePrice = incomePrice;
     },
   },

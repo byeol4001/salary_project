@@ -49,19 +49,19 @@ export default {
       dateCount: '',
     };
   },
-  props: ['postIncomePirce'],
+  props: ['postIncomePrice'],
   methods: {
     moveTo(goto) {
       moveToSmooth(goto);
     },
     clickButton() {
-      const { stuff, price, postIncomePirce } = this;
-      if (!this.postIncomePirce) {
+      const { stuff, price, postIncomePrice } = this;
+      if (!this.postIncomePrice) {
         alert('월급을 입력해 주셔야 해요!');
         moveTo('section_1');
       } else if (stuff && price) {
         this.isActive = true;
-        const count = Math.ceil(price / postIncomePirce);
+        const count = Math.ceil(price / postIncomePrice);
         console.log(count);
         if (count < 1) {
           this.dateCount = '에이😎 하루만 일하면 사겠네';

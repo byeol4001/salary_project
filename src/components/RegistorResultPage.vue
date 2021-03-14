@@ -77,7 +77,7 @@ export default {
       this.workCount = this.count - this.remain;
       this.workPrice = Math.floor((salary / this.count) * this.workCount);
       this.calPercent();
-      this.$emit('postIncomePirce', this.workPrice);
+      this.$emit('postIncomePrice', this.workPrice);
     },
     calPercent() {
       this.percent = (this.workCount / this.count) * 100;
