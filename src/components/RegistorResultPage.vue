@@ -2,25 +2,25 @@
   <div id="section_2" class="sections">
     <div class="text_wrap">
       <div class="text_line" v-if="this.sec1Data.SalarySelect === '월급'">
-        <h1>오늘까지 번 돈은 {{ salaryWon() }}원</h1>
+        <h1>오늘까지 번 돈은 {{ workPrice }}원</h1>
       </div>
       <div class="text_line" v-else-if="this.sec1Data.SalarySelect === '연봉'">
         <h1>
           오늘까지 번 돈은
-          <h1 class="Mfont">{{ salaryWon() }}</h1>
+          <h1 class="Mfont">{{ workPrice }}</h1>
           원
         </h1>
       </div>
       <div class="text_line">
         <h1>
           월급까지 남은날은
-          <small class="Mfont">{{ getNextSalaryDate() }}</small
+          <small class="Mfont">{{ remain }}</small
           >일
         </h1>
       </div>
       <div class="text_line percent_wrap">
         <div class="percent" :style="{ width: percent + '%' }">
-          <img v-if="percent < 50" src="../image/icon2.png" alt="아이콘 " />
+          <img v-if="percent < 60" src="../image/icon2.png" alt="아이콘 " />
           <img v-else src="../image/icon.png" alt="아이콘 " />
         </div>
         <div class="percent"></div>
@@ -39,75 +39,51 @@ import { moveToSmooth } from '../utils/utils';
 export default {
   data() {
     return {
-      percent: '',
-      dailyIncomePrice: '',
-      minusDate: '',
+      remain: null,
+      count: null,
+      workCount: null,
+      percent: null,
+      workPrice: null,
     };
   },
   props: ['sec1Data'],
+  watch: {
+    sec1Data() {
+      this.calSalary();
+      this.calPercent();
+    },
+  },
   methods: {
     moveToSmooth(goto) {
       moveToSmooth(goto);
     },
-    getNextSalaryDate() {
-      let result;
-      const { payday } = this.sec1Data;
-      const year = new Date().getFullYear();
-      const date = new Date().getDate();
-      const month = new Date().getMonth();
-      const paydayDate = new Date(year, month + 1, payday);
-      const paydayDates = new Date(year, month, payday);
-
-      const todayDate = new Date(year, month, date);
-
-      if (payday - new Date().getDate() >= 0) {
-        //월급날짜가 오늘 날짜보다 숫자가 클때
-        result =
-          (paydayDates.getTime() - todayDate.getTime()) / 1000 / 60 / 60 / 24;
-        this.percent = 100 - (result / 30) * 100;
-        this.minusDate = result + 1; //현재 마이너스값인데 , 월급 다음날부터 계산에 포함해야하므로 플러스로 하루 빼준다
-        return result;
-      } else {
-        //월급날짜가 오늘 날짜보다 숫자가 작을때 (즉 월급 무조건 다음달)
-        result =
-          (paydayDate.getTime() - todayDate.getTime()) / 1000 / 60 / 60 / 24;
-        this.percent = 100 - (result / 30) * 100;
-        return result;
-      }
+    calSalary() {
+      let { salary, payday } = this.sec1Data;
+      payday = parseInt(payday);
+      let now = new Date();
+      let salaryObj = new Date(now.getFullYear(), now.getMonth(), payday);
+      let salaryBefore = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        payday
+      );
+      let salaryNext = new Date(now.getFullYear(), now.getMonth() + 1, payday);
+      let remainCount =
+        salaryObj - now < 0 ? salaryNext - now : salaryObj - now;
+      let MonthDateCount =
+        salaryObj - now < 0 ? salaryNext - salaryObj : salaryObj - salaryBefore;
+      this.remain = this.returnDate(remainCount);
+      this.count = this.returnDate(MonthDateCount);
+      this.workCount = this.count - this.remain;
+      this.workPrice = Math.floor((salary / this.count) * this.workCount);
+      this.calPercent();
+      this.$emit('postIncomePirce', this.workPrice);
     },
-    salaryWon() {
-      const { payday, salary } = this.sec1Data;
-      let { dailyIncomePrice } = this;
-      let result;
-      const date = new Date().getDate();
-      const month = new Date().getMonth();
-      const lastDate = new Date(2020, month + 1, 0).getDate();
-
-      dailyIncomePrice = salary / lastDate;
-
-      if (!this.minusDate) {
-        this.$emit('postIncomePirce', dailyIncomePrice);
-        result = Math.floor(
-          parseFloat(dailyIncomePrice * (date - payday))
-        ).toLocaleString();
-        return result;
-      } else {
-        //월급날이 마이너스 뜰때
-        const countWorkDate = -1 + date;
-        result = Math.floor(
-          parseFloat(dailyIncomePrice * countWorkDate)
-        ).toLocaleString();
-        return result;
-      }
-
-      /*  ---연봉계산하기--- else {
-        result = Math.floor(
-          parseFloat((salary / 365) * countDate)
-        ).toLocaleString();
-        console.log(salary / 365, '샐러리를 나눈거');
-        console.log(countDate, 'countDate');
-        return result;
-      } */
+    calPercent() {
+      this.percent = (this.workCount / this.count) * 100;
+    },
+    returnDate(num) {
+      return Math.ceil(num / (1000 * 60 * 60 * 24));
     },
   },
 };
