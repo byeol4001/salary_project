@@ -12,15 +12,22 @@
         </h1>
       </div>
       <div class="text_line">
-        <h1>
+        <h1 v-if="!today">
           월급까지 남은날은
           <small class="Mfont">{{ remain }}</small
           >일
         </h1>
+        <h1 v-else>
+          오늘 월급날이잖아!!!!
+        </h1>
       </div>
       <div class="text_line percent_wrap">
         <div class="percent" :style="{ width: percent + '%' }">
-          <img v-if="percent < 60" src="../image/icon2.png" alt="아이콘 " />
+          <img
+            v-if="percent < 60 && today"
+            src="../image/icon2.png"
+            alt="아이콘 "
+          />
           <img v-else src="../image/icon.png" alt="아이콘 " />
         </div>
         <div class="percent"></div>
@@ -44,6 +51,7 @@ export default {
       workCount: null,
       percent: null,
       workPrice: null,
+      today: false,
     };
   },
   props: ['sec1Data'],
@@ -60,6 +68,7 @@ export default {
     calSalary() {
       let { salary, payday } = this.sec1Data;
       payday = parseInt(payday);
+
       let now = new Date();
       let salaryObj = new Date(now.getFullYear(), now.getMonth(), payday);
       let salaryBefore = new Date(
@@ -75,12 +84,19 @@ export default {
       this.remain = this.returnDate(remainCount);
       this.count = this.returnDate(MonthDateCount);
       this.workCount = this.count - this.remain;
-      this.workPrice = Math.floor((salary / this.count) * this.workCount);
+      if (payday == now.getDate()) {
+        this.today = true;
+        this.workPrice = salary;
+      } else {
+        this.workPrice = Math.floor((salary / this.count) * this.workCount);
+      }
       this.calPercent();
-      this.$emit('postIncomePrice', this.workPrice);
+      this.$emit('postIncomePrice', Math.floor(salary / this.count));
     },
     calPercent() {
-      this.percent = (this.workCount / this.count) * 100;
+      today
+        ? (this.percent = 100)
+        : (this.percent = (this.workCount / this.count) * 100);
     },
     returnDate(num) {
       return Math.ceil(num / (1000 * 60 * 60 * 24));

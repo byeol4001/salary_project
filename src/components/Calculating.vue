@@ -68,7 +68,7 @@ export default {
         } else if (1 < count > 2) {
           this.dateCount = '하루하고 조금만 더 일하면 살 수 있어😊';
         } else {
-          this.dateCount = `${stuff} 사려면  ${Math.ceil(
+          this.dateCount = `${stuff} 사려면 적어도 ${Math.ceil(
             count
           )}일 동안 일해야해... 화이팅 😊`;
         }
