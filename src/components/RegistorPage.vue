@@ -66,7 +66,6 @@ export default {
         };
         this.$emit('sandData', data);
         moveToSmooth(goto);
-        console.log(goto, 'dd');
       } else if (!this.payday) {
         alert('🗓 급여일을 알려주세요! (숫자만 입력가능)');
       } else if (this.salary === '') {

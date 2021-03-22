@@ -90,11 +90,11 @@ export default {
       } else {
         this.workPrice = Math.floor((salary / this.count) * this.workCount);
       }
-      this.calPercent();
       this.$emit('postIncomePrice', Math.floor(salary / this.count));
+      this.calPercent();
     },
     calPercent() {
-      today
+      this.today
         ? (this.percent = 100)
         : (this.percent = (this.workCount / this.count) * 100);
     },
